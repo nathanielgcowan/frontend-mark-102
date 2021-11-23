@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 class BandNew extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            id: uuidv4(),
             chord: '',
             instrument: '',
             album: '',
@@ -29,7 +31,6 @@ class BandNew extends Component {
             likes: this.state.likes, 
             name: this.state.name
         };
-        console.log(band)
     }
 
     render() {

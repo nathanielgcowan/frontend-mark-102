@@ -1,36 +1,26 @@
 import './App.css';
-import Home from './Home';
-import SecondView from './SecondView';
-import BandList from './BandList';
-import BandDetailView from './BandDetailView';
-import BandNew from './BandNew';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import BandData from './data.json';
-import { v4 as uuidv4 } from 'uuid';
+import Home from './components/Home';
+import BandList from './components/BandList';
+import BandDetailView from './components/BandDetailView';
+import NavBar from './components/NavBar'
+import BandNew from './components/BandNew';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-  const bands = BandData.map(bands => {
-    return { ...bands, id: uuidv4() }
-  })
 
   return (
-    <BrowserRouter>
+    <Router>
       <div>
-        <div className="navbar">
-          <Link to="/"><div>Home</div></Link>
-          <Link to="/bands"><div>List of Bands</div></Link>
-          <Link to="/bandnew"><div>New Band</div></Link>
-        </div>
+        <NavBar />
         <Routes>
           <Route path="/" element={ <Home /> } />
-          <Route path="/secondview" element={ <SecondView /> } />
-          <Route path="/bands" element={ <BandList bands={ bands }/> } >
-            <Route path=":bandId" element={ <BandDetailView bands={ bands } /> } />
+          <Route path="/bands" element={ <BandList /> } >
+            <Route path=":bandId" element={ <BandDetailView /> } />
           </Route>
           <Route path="/bandnew" element={ <BandNew /> } />
         </Routes>
       </div>
-    </BrowserRouter>
+    </Router>
   );
 }
 
